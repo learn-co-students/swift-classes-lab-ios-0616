@@ -12,18 +12,33 @@
  
  To start, define a class called `Thermometer`. This class should contain one property, `fahrenheit` (a `Double`), to hold the temperature represented by the thermometer. This property should be a _variable_. You should also create an initializer for this class that takes one parameter and assigns that parameter to the `fahrenheit` property.
  */
-// write your code here
-
+class Thermometer {
+    
+    var fahrenheit: Double
+    var celsius: Double {
+        get {
+            return (fahrenheit - 32.0) * 5/9
+        }
+        set {
+            fahrenheit = celsius * 9/5 + 32
+        }
+    }
+    var description: String {
+        return "The current temperature is \(fahrenheit)°F \(celsius)°C"
+    }
+    
+    init (fahrenheit: Double) {
+        self.fahrenheit = fahrenheit
+    }
+}
 /*: section2
  
  ## Question 2
  
  Good! Now, create a `Thermometer` instance that has an initial value of `88.0` for `fahrenheit`. This instance should be a _variable_. Call it `thermometer`.
  */
-// write your code here
-
+var thermometer = Thermometer(fahrenheit: 88.0)
 assert(thermometer.fahrenheit == 88.0, "thermometer.fahrenheit is \(thermometer.fahrenheit)")
-
 /*: section3
  
  ## Question 3
@@ -33,18 +48,15 @@ assert(thermometer.fahrenheit == 88.0, "thermometer.fahrenheit is \(thermometer.
  You can make your modifications to the code you wrote for Question #1.
  */
 assert(thermometer.celsius - 31.1 < 0.1, "thermometer.celsius is \(thermometer.celsius)")
-
 /*: section4
  
  ## Question 4
  
  Perfect! Now, change the `fahrenheit` temperature of your `Thermometer` instance to 100.0.
  */
-// write your code here
-
+//thermometer.fahrenheit = 100.0
 assert(thermometer.fahrenheit == 100.0, "thermometer.fahrenheit is \(thermometer.fahrenheit)")
 assert(thermometer.celsius - 37.7 < 0.1, "thermometer.celsius is \(thermometer.celsius)")
-
 /*: section5
  
  ## Question 5
@@ -57,11 +69,10 @@ assert(thermometer.celsius - 37.7 < 0.1, "thermometer.celsius is \(thermometer.c
  
  Now set the `celsius` temperature of your `Thermometer` instance to 100.0
  */
-// write your code here
-
+thermometer.celsius = 100.0
+// I can't simultaneously alter fahrenheit & celsius properties in order to get this to work since celsius has a getter based on fahrenheit.
 assert(thermometer.celsius == 100.0, "thermometer.celsius is \(thermometer.celsius)")
 assert(thermometer.fahrenheit == 212.0, "thermometer.fahrenheit is \(thermometer.fahrenheit)")
-
 /*: section7
  
  ## Question 7
